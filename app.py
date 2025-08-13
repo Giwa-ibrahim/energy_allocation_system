@@ -476,7 +476,7 @@ def main():
     #If model loading failed, create demo resources for testing
     if model is None:
         logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
-        st.sidebar.warning("⚠️ Using demo mode: Model files not found")
+        #st.sidebar.warning("⚠️ Using demo mode: Model files not found")
         model, feature_scaler, target_scaler = create_demo_resources()
     
     # if model is not None:
@@ -608,9 +608,8 @@ def main():
                 
                 # Generate input sequence
                 logger.info("Generating input sequence")
-                logger.info(f"feature_scaler type: {type(feature_scaler)}, value: {feature_scaler}")
                 input_sequence = generate_input_sequence(feature_scaler, input_features)
-                logger.info(f"Loaded feature_scaler: {type(input_sequence)}, value: {input_sequence}")
+                #logger.info(f"Loaded feature_scaler: {type(input_sequence)}, value: {input_sequence}")
                 # Generate forecast
                 with st.spinner("Forecasting energy demand..."):
                     logger.info("Running model prediction")
