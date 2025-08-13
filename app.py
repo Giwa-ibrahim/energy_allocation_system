@@ -608,8 +608,9 @@ def main():
                 
                 # Generate input sequence
                 logger.info("Generating input sequence")
+                logger.info(f"feature_scaler type: {type(feature_scaler)}, value: {feature_scaler}")
                 input_sequence = generate_input_sequence(feature_scaler, input_features)
-                
+                logger.info(f"Loaded feature_scaler: {type(input_sequence)}, value: {input_sequence}")
                 # Generate forecast
                 with st.spinner("Forecasting energy demand..."):
                     logger.info("Running model prediction")
