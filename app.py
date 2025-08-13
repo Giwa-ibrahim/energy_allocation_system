@@ -148,34 +148,34 @@ def load_prediction_resources():
 
 # Function to create a fake model and scalers for demo purposes
 @st.cache_resource
-def create_demo_resources():
-    """Create demo model and scalers for testing the app without the real model"""
-    logger.info("Creating demo resources for testing")
+# def create_demo_resources():
+#     """Create demo model and scalers for testing the app without the real model"""
+#     logger.info("Creating demo resources for testing")
     
-    # Create a simple model that returns random predictions
-    class DemoModel:
-        def predict(self, X):
-            batch_size = X.shape[0]
-            # Generate random predictions for 24 hours forecast and 12 feeders
-            logger.debug(f"Demo model predicting with input shape: {X.shape}")
-            return np.random.rand(batch_size, 24, 12) * 0.5
+#     # Create a simple model that returns random predictions
+#     class DemoModel:
+#         def predict(self, X):
+#             batch_size = X.shape[0]
+#             # Generate random predictions for 24 hours forecast and 12 feeders
+#             logger.debug(f"Demo model predicting with input shape: {X.shape}")
+#             return np.random.rand(batch_size, 24, 12) * 0.5
     
-    # Create demo scalers
-    class DemoScaler:
-        def transform(self, X):
-            logger.debug(f"Demo scaler transforming data with shape: {X.shape}")
-            return X * 0.5
+#     # Create demo scalers
+#     class DemoScaler:
+#         def transform(self, X):
+#             logger.debug(f"Demo scaler transforming data with shape: {X.shape}")
+#             return X * 0.5
         
-        def inverse_transform(self, X):
-            logger.debug(f"Demo scaler inverse transforming data with shape: {X.shape}")
-            return X * 2.0
+#         def inverse_transform(self, X):
+#             logger.debug(f"Demo scaler inverse transforming data with shape: {X.shape}")
+#             return X * 2.0
     
-    model = DemoModel()
-    feature_scaler = DemoScaler()
-    target_scaler = DemoScaler()
+#     model = DemoModel()
+#     feature_scaler = DemoScaler()
+#     target_scaler = DemoScaler()
     
-    logger.info("Demo resources created successfully")
-    return model, feature_scaler, target_scaler
+#     logger.info("Demo resources created successfully")
+#     return model, feature_scaler, target_scaler
 
 # Function to generate input sequence for model
 def generate_input_sequence(feature_scaler, input_features):
@@ -479,12 +479,12 @@ def main():
     #     #st.sidebar.warning("⚠️ Using demo mode: Model files not found")
     #     model, feature_scaler, target_scaler = create_demo_resources()
     
-    if model is not None:
-        logger.info("Model loaded successfully")
-    else:
-        logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
-        st.sidebar.warning("⚠️ Using demo mode: Model files not found")
-        model, feature_scaler, target_scaler = create_demo_resources()
+    # if model is not None:
+    #     logger.info("Model loaded successfully")
+    # else:
+    #     logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
+    #     st.sidebar.warning("⚠️ Using demo mode: Model files not found")
+    #     model, feature_scaler, target_scaler = create_demo_resources()
 
     # Input parameters section
     logger.info("Setting up user input parameters")
