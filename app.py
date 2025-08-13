@@ -181,16 +181,21 @@ def create_demo_resources():
 def generate_input_sequence(feature_scaler, input_features):
     """Generate input sequence for the LSTM model"""
     logger.info(f"Generating input sequence with shape: {input_features.shape}")
-    
+
+    # Check if feature_scaler is None
+    if feature_scaler is None:
+        logger.error("Feature scaler is None. Cannot generate input sequence.")
+        raise ValueError("Feature scaler is not loaded. Please check model/scaler files.")
+
     # Scale the features
     try:
         scaled_features = feature_scaler.transform(input_features)
         logger.debug(f"Features scaled, new shape: {scaled_features.shape}")
-        
+
         # Repeat the features to create a sequence
         sequence = np.repeat(scaled_features, 24, axis=0).reshape(1, 24, -1)
         logger.info(f"Input sequence generated with shape: {sequence.shape}")
-        
+
         return sequence
     except Exception as e:
         logger.error(f"Error generating input sequence: {str(e)}", exc_info=True)
