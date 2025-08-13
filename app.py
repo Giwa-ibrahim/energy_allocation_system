@@ -473,11 +473,11 @@ def main():
     logger.info("Loading prediction resources")
     model, feature_scaler, target_scaler, error_message = load_prediction_resources()
     
-    # If model loading failed, create demo resources for testing
-    # if model is None:
-    #     logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
-    #     st.sidebar.warning("⚠️ Using demo mode: Model files not found")
-    #     model, feature_scaler, target_scaler = create_demo_resources()
+    #If model loading failed, create demo resources for testing
+    if model is None:
+        logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
+        st.sidebar.warning("⚠️ Using demo mode: Model files not found")
+        model, feature_scaler, target_scaler = create_demo_resources()
     
     # if model is not None:
     #     logger.info("Model loaded successfully")
