@@ -126,8 +126,15 @@ def load_prediction_resources():
         logger.info(f"Model loaded successfully. Summary: {model.summary()}")
         
         logger.info("Loading feature scaler...")
-        feature_scaler = joblib.load(feature_scaler_path)
-        logger.info("Feature scaler loaded successfully")
+        try:
+            feature_scaler = joblib.load(feature_scaler_path)
+            if feature_scaler is None:
+                logger.error("Feature scaler loaded as None. File may be corrupted.")
+                return None, None, None, "Feature scaler file is corrupted or unreadable."
+            logger.info("Feature scaler loaded successfully")
+        except Exception as e:
+            logger.error(f"Error loading feature scaler: {str(e)}", exc_info=True)
+            return None, None, None, f"Error loading feature scaler: {str(e)}"
         
         logger.info("Loading target scaler...")
         target_scaler = joblib.load(target_scaler_path)
@@ -467,6 +474,13 @@ def main():
     #     st.sidebar.warning("⚠️ Using demo mode: Model files not found")
     #     model, feature_scaler, target_scaler = create_demo_resources()
     
+    if model is not None:
+        logger.info("Model loaded successfully")
+    else:
+        logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
+        st.sidebar.warning("⚠️ Using demo mode: Model files not found")
+        model, feature_scaler, target_scaler = create_demo_resources()
+
     # Input parameters section
     logger.info("Setting up user input parameters")
     st.sidebar.subheader("Date and Time Parameters")
