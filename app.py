@@ -479,12 +479,12 @@ def main():
     #     #st.sidebar.warning("⚠️ Using demo mode: Model files not found")
     #     model, feature_scaler, target_scaler = create_demo_resources()
     
-    # if model is not None:
-    #     logger.info("Model loaded successfully")
-    # else:
-    #     logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
-    #     st.sidebar.warning("⚠️ Using demo mode: Model files not found")
-    #     model, feature_scaler, target_scaler = create_demo_resources()
+    if model is not None:
+        logger.info("Model loaded successfully")
+    else:
+        logger.warning(f"Failed to load model: {error_message}. Switching to demo mode.")
+        st.sidebar.warning("⚠️ Using demo mode: Model files not found")
+        model, feature_scaler, target_scaler = create_demo_resources()
 
     # Input parameters section
     logger.info("Setting up user input parameters")
