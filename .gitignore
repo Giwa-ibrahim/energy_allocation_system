@@ -3,3 +3,5 @@ Post data report.docx
 app.log
 logs/
 .venv/
+tuners/
+shap_values/
